@@ -1,0 +1,100 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.phone {
+    overflow-y: auto;
+}
+
+.billing_home {
+    padding: 5px;
+}
+
+.billing_box {
+    width: 100%;
+    background-color: var(--billing-box-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
+
+.billing_box:hover {
+    background-color: #7a7777;
+}
+
+.billing_details {
+    padding: 10px;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill_target {
+    font-size: 16px;
+    color: var(--text-color);
+    display: grid;
+}
+
+.bill_label {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.bill_amount {
+    display: grid;
+    justify-items: end;
+    gap: 5px;
+}
+
+.bill_amount span {
+    font-size: 16px;
+    color: var(--amount-color);
+}
+
+.pay_button {
+    padding: 5px;
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+}
+
+.pay_button:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text-color);
+}
+
+:root,
+.dark {
+    --billing-box-bg: #f9f9f9;
+    --text-color: #000000;
+    --amount-color: red;
+    --button-bg: #000000;
+    --button-text-color: #ffffff;
+    --button-hover-bg: #be0c0c;
+    --button-hover-text-color: #ffffff;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --billing-box-bg: #1f1d1d;
+        --text-color: #ffffff;
+        --amount-color: red;
+        --button-bg: #ffffff;
+        --button-text-color: #000000;
+        --button-hover-bg: #be0c0c;
+        --button-hover-text-color: #ffffff;
+    }
+}
