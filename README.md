@@ -2,4 +2,4 @@
 ESX, Billing application made for GKSPHONE v2
 
 ## Requirement
-    -- esx_billing
+    esx_billing
