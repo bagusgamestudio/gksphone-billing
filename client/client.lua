@@ -1,32 +1,20 @@
-local ESX = nil
-
-Citizen.CreateThread(function()
-    pcall(function() ESX = exports["es_extended"]:getSharedObject() end)
-end)
-
-
 RegisterNUICallback('input', function(data, cb)
     exports["gksphone"]:InputChange(data)
     cb('ok')
 end)
 
-RegisterNUICallback('getInfo', function(data, cb)  -- Uygulamaya girdiğinde çalışacak olan fonksiyon
-    if ESX then
-        ESX.TriggerServerCallback('esx_billing:getBills', function(bills)
-            exports["gksphone"]:NuiSendMessage({event = 'getBills', bills = bills})
-        end)
-    end
+RegisterNUICallback('getInfo', function(data, cb)
+    local bills = lib.callback.await('gksphone-billing:server:GetBillings')
+    exports["gksphone"]:NuiSendMessage({ event = 'getBills', bills = bills })
     cb('ok')
 end)
 
 RegisterNUICallback('billing_pay', function(data, cb)
-    if ESX then
-        ESX.TriggerServerCallback('esx_billing:payBill', function(test)
-            Wait(1000)
-            ESX.TriggerServerCallback('esx_billing:getBills', function(bills)
-                exports["gksphone"]:NuiSendMessage({event = 'getBills', bills = bills})
-                cb('ok')
-            end)
-        end, data.id)
+    local success = lib.callback.await('gksphone-billing:server:PayBill', data.id)
+    if success then
+        Wait(1000)
+        local bills = lib.callback.await('gksphone-billing:server:GetBillings')
+        exports["gksphone"]:NuiSendMessage({ event = 'getBills', bills = bills })
     end
+    cb('ok')
 end)

@@ -7,7 +7,10 @@ author "xenknight"
 
 ui_page 'ui/index.html'
 
+shared_script "@ox_lib/init.lua"
 client_script "client/*.lua"
+server_script "server/*.lua"
+
 files {
     "ui/index.html",
     "ui/js/*.js",
